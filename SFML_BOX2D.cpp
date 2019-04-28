@@ -17,9 +17,9 @@ int main()
 
 	/** Prepare the world */
 	b2Vec2 Gravity(0.f, 9.8f);
-	b2World World(Gravity);
+	b2World World(b2Vec2(0, 0));
 	CreateGround(World, 400.f, 500.f);
-
+	Gravity.y = -1.0f;
 	/** Prepare textures */
 
 	while (Window.isOpen())
@@ -29,6 +29,12 @@ int main()
 			int MouseX = sf::Mouse::getPosition(Window).x;
 			int MouseY = sf::Mouse::getPosition(Window).y;
 			CreateBox(World, MouseX, MouseY);
+		}
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
+		{
+			int MouseX = sf::Mouse::getPosition(Window).x;
+			int MouseY = sf::Mouse::getPosition(Window).y;
+			CreateGround(World, MouseX, MouseY);
 		}
 		World.Step(1 / 60.f, 8, 3);
 
